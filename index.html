@@ -15,8 +15,7 @@
         .text-sturmer-yellow { color: #f7c300; }
         .border-sturmer-yellow { border-color: #f7c300; }
         .dark-section { background-color: #0a0a0a; }
-        
-        /* Ajuste do botão flutuante para não cobrir conteúdos vitais no mobile */
+
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
@@ -35,8 +34,28 @@
             justify-content: center;
         }
 
-        /* Animação suave para os botões */
         .btn-bounce:active { transform: scale(0.95); }
+
+        /* Avatar flutuante com animação suave */
+        .avatar-float {
+            animation: float 3.5s ease-in-out infinite;
+            filter: drop-shadow(0 20px 40px rgba(247, 195, 0, 0.25));
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-14px); }
+        }
+
+        /* Brilho pulsante no botão CTA */
+        .cta-glow {
+            box-shadow: 0 0 0 0 rgba(247, 195, 0, 0.7);
+            animation: pulse-cta 2.2s infinite;
+        }
+        @keyframes pulse-cta {
+            0%   { box-shadow: 0 0 0 0   rgba(247, 195, 0, 0.7); }
+            70%  { box-shadow: 0 0 0 18px rgba(247, 195, 0, 0); }
+            100% { box-shadow: 0 0 0 0   rgba(247, 195, 0, 0); }
+        }
     </style>
 </head>
 <body class="bg-white text-gray-900">
@@ -45,59 +64,94 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <!-- ═══════════════════════════════════════════════
+         NAVBAR — logo pequena à esquerda + logo grande + botão à direita
+    ═══════════════════════════════════════════════ -->
     <nav class="bg-white border-b-4 border-sturmer-yellow sticky top-0 z-50 py-3">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+
+            <!-- Logo esquerda (pequena, identidade) -->
             <div class="flex-shrink-0">
-                <img class="h-16 md:h-24 w-auto" src="assets/logo.png" alt="Logo">
+                <img class="h-12 md:h-16 w-auto" src="assets/logo.png" alt="Stürmer Multas">
             </div>
-            <div>
-                <a href="https://wa.me/554935181609" class="bg-sturmer-yellow text-black px-4 py-2 md:px-6 md:py-3 rounded font-black transition text-xs md:text-sm uppercase btn-bounce shadow-sm">
+
+            <!-- Lado direito: logo grande + botão -->
+            <div class="flex items-center gap-3 md:gap-5">
+                <!-- Logo grande ao lado do botão — visível somente md+ -->
+                <img
+                    class="hidden md:block h-20 w-auto opacity-95"
+                    src="assets/logo.png"
+                    alt="Stürmer Multas"
+                >
+                <a href="https://wa.me/554935181609"
+                   class="bg-sturmer-yellow text-black px-4 py-2 md:px-6 md:py-3 rounded font-black transition text-xs md:text-sm uppercase btn-bounce shadow-sm whitespace-nowrap">
                     Falar com IA
                 </a>
             </div>
+
         </div>
     </nav>
 
-    <section class="dark-section text-white py-12 md:py-24 px-4 border-b-8 border-sturmer-yellow">
-        <div class="max-w-7xl mx-auto text-center">
-            <h1 class="text-4xl md:text-8xl font-black leading-none tracking-tighter">
-                FOI MULTADO? <br><span class="text-sturmer-yellow uppercase">NÓS ANULAMOS.</span>
-            </h1>
-            <p class="mt-6 text-lg md:text-2xl text-gray-400 max-w-3xl mx-auto font-light leading-snug">
-                Nossa IA jurídica gera sua defesa técnica personalizada em apenas <span class="text-white font-bold underline decoration-sturmer-yellow">10 minutos</span>.
-            </p>
-            
-            <div class="mt-10">
-                <a href="https://wa.me/554935181609" class="bg-sturmer-yellow text-black text-lg md:text-2xl px-6 py-4 md:px-12 md:py-6 rounded font-black shadow-xl transition inline-flex items-center gap-3 uppercase w-full md:w-auto justify-center btn-bounce">
-                    <i class="fab fa-whatsapp text-2xl"></i> Iniciar pelo WhatsApp
-                </a>
-                <p class="mt-6 text-xs md:text-sm text-gray-500 uppercase tracking-widest font-bold">
+    <!-- ═══════════════════════════════════════════════
+         HERO — headline à esquerda, avatar à direita
+    ═══════════════════════════════════════════════ -->
+    <section class="dark-section text-white border-b-8 border-sturmer-yellow overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 py-12 md:py-20 flex flex-col md:flex-row items-center gap-8 md:gap-0">
+
+            <!-- Texto -->
+            <div class="flex-1 text-center md:text-left">
+                <h1 class="text-4xl md:text-7xl font-black leading-none tracking-tighter">
+                    FOI MULTADO? <br><span class="text-sturmer-yellow uppercase">NÓS ANULAMOS.</span>
+                </h1>
+                <p class="mt-6 text-lg md:text-2xl text-gray-400 max-w-xl font-light leading-snug">
+                    Nossa IA jurídica gera sua defesa técnica personalizada em apenas
+                    <span class="text-white font-bold underline decoration-sturmer-yellow">10 minutos</span>.
+                </p>
+
+                <div class="mt-10 flex flex-col md:flex-row items-center md:items-start gap-4">
+                    <a href="https://wa.me/554935181609"
+                       class="cta-glow bg-sturmer-yellow text-black text-lg md:text-xl px-8 py-4 md:px-10 md:py-5 rounded font-black shadow-xl transition inline-flex items-center gap-3 uppercase w-full md:w-auto justify-center btn-bounce">
+                        <i class="fab fa-whatsapp text-2xl"></i> Iniciar pelo WhatsApp
+                    </a>
+                </div>
+                <p class="mt-5 text-xs md:text-sm text-gray-500 uppercase tracking-widest font-bold text-center md:text-left">
                     <i class="fas fa-bolt text-sturmer-yellow"></i> Processamento imediato
                 </p>
             </div>
+
+            <!-- Avatar mascote -->
+            <div class="flex-shrink-0 flex justify-center md:justify-end w-full md:w-auto">
+                <img
+                    src="assets/avatar.png"
+                    alt="Assistente Stürmer Multas"
+                    class="avatar-float h-64 md:h-[420px] w-auto object-contain select-none pointer-events-none"
+                >
+            </div>
+
         </div>
     </section>
 
+    <!-- ═══════════════════════════════════════════════
+         COMO FUNCIONA
+    ═══════════════════════════════════════════════ -->
     <section class="py-16 md:py-24 px-4 bg-gray-50">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12 md:mb-20">
                 <h2 class="text-3xl md:text-4xl font-black text-gray-900 uppercase">Como funciona?</h2>
                 <div class="w-20 h-2 bg-sturmer-yellow mx-auto mt-4"></div>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                 <div class="bg-white p-8 md:p-10 rounded shadow-lg border-t-8 border-sturmer-yellow">
                     <span class="text-5xl font-black text-gray-100 block mb-2">01</span>
                     <h3 class="text-xl md:text-2xl font-bold mb-3 uppercase">Envie a Multa</h3>
                     <p class="text-gray-600 text-sm md:text-base">Mande o PDF ou foto da autuação para nossa IA no WhatsApp.</p>
                 </div>
-
                 <div class="bg-white p-8 md:p-10 rounded shadow-lg border-t-8 border-sturmer-yellow">
                     <span class="text-5xl font-black text-gray-100 block mb-2">02</span>
                     <h3 class="text-xl md:text-2xl font-bold mb-3 uppercase">Responda a IA</h3>
                     <p class="text-gray-600 text-sm md:text-base">Forneça detalhes rápidos que a IA solicitar sobre a infração.</p>
                 </div>
-
                 <div class="bg-white p-8 md:p-10 rounded shadow-lg border-t-8 border-sturmer-yellow">
                     <span class="text-5xl font-black text-gray-100 block mb-2">03</span>
                     <h3 class="text-xl md:text-2xl font-bold mb-3 uppercase">Recurso Pronto</h3>
@@ -107,6 +161,9 @@
         </div>
     </section>
 
+    <!-- ═══════════════════════════════════════════════
+         URGÊNCIA
+    ═══════════════════════════════════════════════ -->
     <section class="bg-sturmer-yellow py-10 px-4">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <h2 class="text-2xl md:text-4xl font-black text-black uppercase leading-tight">O prazo está correndo!</h2>
@@ -116,6 +173,9 @@
         </div>
     </section>
 
+    <!-- ═══════════════════════════════════════════════
+         POR QUE SOMOS A MELHOR ESCOLHA
+    ═══════════════════════════════════════════════ -->
     <section class="py-16 md:py-24 px-4 bg-white">
         <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div class="order-2 md:order-1">
@@ -138,9 +198,12 @@
         </div>
     </section>
 
+    <!-- ═══════════════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════════════ -->
     <footer class="dark-section text-white py-12 md:py-20 px-4 border-t-8 border-sturmer-yellow">
         <div class="max-w-7xl mx-auto text-center">
-            <img src="assets/logo.png" alt="Logo" class="h-20 md:h-32 mx-auto mb-8 opacity-90">
+            <img src="assets/logo.png" alt="Stürmer Multas" class="h-20 md:h-32 mx-auto mb-8 opacity-90">
             <div class="flex justify-center gap-8 mb-8 text-sturmer-yellow text-3xl">
                 <a href="https://wa.me/554935181609" class="hover:text-white"><i class="fab fa-whatsapp"></i></a>
             </div>
