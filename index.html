@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IA Recurso de Multas | Defesa em 10 Minutos</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -10,71 +10,84 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .bg-sturmer-yellow { background-color: #f7c300; }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+        .bg-sturmer-yellow  { background-color: #f7c300; }
         .text-sturmer-yellow { color: #f7c300; }
         .border-sturmer-yellow { border-color: #f7c300; }
         .dark-section { background-color: #0a0a0a; }
 
+        /* WhatsApp flutuante */
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
             right: 20px;
             background-color: #25d366;
             color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 32px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            font-size: 28px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.4);
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
+            text-decoration: none;
         }
 
         .btn-bounce:active { transform: scale(0.95); }
 
-        /* Avatar — PNG transparente direto sobre o fundo escuro */
+        /* Avatar animado */
         .avatar-float {
             animation: float 3.5s ease-in-out infinite;
-            filter: drop-shadow(0 24px 40px rgba(247, 195, 0, 0.30));
+            filter: drop-shadow(0 16px 32px rgba(247,195,0,0.30));
         }
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50%       { transform: translateY(-14px); }
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-12px); }
         }
 
-        /* Brilho pulsante no botão CTA */
+        /* Pulso CTA */
         .cta-glow {
-            box-shadow: 0 0 0 0 rgba(247, 195, 0, 0.7);
             animation: pulse-cta 2.2s infinite;
         }
         @keyframes pulse-cta {
-            0%   { box-shadow: 0 0 0 0   rgba(247, 195, 0, 0.7); }
-            70%  { box-shadow: 0 0 0 18px rgba(247, 195, 0, 0); }
-            100% { box-shadow: 0 0 0 0   rgba(247, 195, 0, 0); }
+            0%   { box-shadow: 0 0 0 0   rgba(247,195,0,0.7); }
+            70%  { box-shadow: 0 0 0 16px rgba(247,195,0,0); }
+            100% { box-shadow: 0 0 0 0   rgba(247,195,0,0); }
         }
     </style>
 </head>
 <body class="bg-white text-gray-900">
 
-    <a href="https://wa.me/554935181609" class="whatsapp-float btn-bounce" target="_blank">
+    <a href="https://wa.me/554935181609" class="whatsapp-float btn-bounce" target="_blank" rel="noopener">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- NAVBAR — logo grande única à esquerda + botão à direita -->
-    <nav class="bg-white border-b-4 border-sturmer-yellow sticky top-0 z-50 py-2">
-        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+    <!-- ══════════════════════════════
+         NAVBAR
+    ══════════════════════════════ -->
+    <nav class="sticky top-0 z-50" style="background-color:#f7c300; border-bottom:4px solid #0a0a0a;">
+        <div class="w-full px-4 py-2 flex justify-between items-center">
 
             <div class="flex-shrink-0">
-                <img class="h-24 md:h-36 w-auto" src="assets/logo.png" alt="Stürmer Multas">
+                <!-- Mobile: h-14 | Desktop: h-32 -->
+                <img
+                    src="assets/logo.png"
+                    alt="Stürmer Multas"
+                    class="h-14 md:h-32 w-auto"
+                    style="max-width: 55vw;"
+                >
             </div>
 
-            <div>
+            <div class="flex-shrink-0">
                 <a href="https://wa.me/554935181609"
-                   class="bg-sturmer-yellow text-black px-5 py-2 md:px-8 md:py-3 rounded font-black transition text-sm md:text-base uppercase btn-bounce shadow-sm">
+                   class="bg-sturmer-yellow text-black px-4 py-2 md:px-8 md:py-3 rounded font-black text-xs md:text-base uppercase btn-bounce shadow-sm whitespace-nowrap">
                     Falar com IA
                 </a>
             </div>
@@ -82,117 +95,131 @@
         </div>
     </nav>
 
-    <!-- HERO -->
-    <section class="dark-section text-white border-b-8 border-sturmer-yellow overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 py-12 md:py-20 flex flex-col md:flex-row items-center gap-8 md:gap-0">
+    <!-- ══════════════════════════════
+         HERO
+    ══════════════════════════════ -->
+    <section class="dark-section text-white border-b-8 border-sturmer-yellow">
+        <div class="w-full px-4 py-10 md:py-20 flex flex-col md:flex-row items-center gap-6 md:gap-0 md:max-w-7xl md:mx-auto">
 
-            <div class="flex-1 text-center md:text-left">
-                <h1 class="text-4xl md:text-7xl font-black leading-none tracking-tighter">
-                    FOI MULTADO? <br><span class="text-sturmer-yellow uppercase">NÓS ANULAMOS.</span>
+            <!-- Texto -->
+            <div class="w-full md:flex-1 text-center md:text-left">
+                <h1 class="text-3xl sm:text-4xl md:text-7xl font-black leading-tight tracking-tighter">
+                    FOI MULTADO?<br>
+                    <span class="text-sturmer-yellow uppercase">NÓS ANULAMOS.</span>
                 </h1>
-                <p class="mt-6 text-lg md:text-2xl text-gray-400 max-w-xl font-light leading-snug">
+                <p class="mt-4 text-base md:text-2xl text-gray-400 font-light leading-snug">
                     Nossa IA jurídica gera sua defesa técnica personalizada em apenas
                     <span class="text-white font-bold underline decoration-sturmer-yellow">10 minutos</span>.
                 </p>
 
-                <div class="mt-10 flex flex-col md:flex-row items-center md:items-start gap-4">
+                <div class="mt-8">
                     <a href="https://wa.me/554935181609"
-                       class="cta-glow bg-sturmer-yellow text-black text-lg md:text-xl px-8 py-4 md:px-10 md:py-5 rounded font-black shadow-xl transition inline-flex items-center gap-3 uppercase w-full md:w-auto justify-center btn-bounce">
-                        <i class="fab fa-whatsapp text-2xl"></i> Iniciar pelo WhatsApp
+                       class="cta-glow bg-sturmer-yellow text-black text-base md:text-xl px-6 py-4 md:px-10 md:py-5 rounded font-black shadow-xl inline-flex items-center gap-3 uppercase w-full md:w-auto justify-center btn-bounce">
+                        <i class="fab fa-whatsapp text-xl md:text-2xl"></i> Iniciar pelo WhatsApp
                     </a>
                 </div>
-                <p class="mt-5 text-xs md:text-sm text-gray-500 uppercase tracking-widest font-bold text-center md:text-left">
+                <p class="mt-4 text-xs text-gray-500 uppercase tracking-widest font-bold text-center md:text-left">
                     <i class="fas fa-bolt text-sturmer-yellow"></i> Processamento imediato
                 </p>
             </div>
 
-            <!-- Avatar sem container — transparência limpa sobre o dark -->
-            <div class="flex-shrink-0 flex justify-center md:justify-end w-full md:w-auto">
+            <!-- Avatar -->
+            <div class="flex-shrink-0 flex justify-center w-full md:w-auto">
                 <img
                     src="assets/avatar.png"
                     alt="Assistente Stürmer Multas"
-                    class="avatar-float h-64 md:h-[440px] w-auto select-none pointer-events-none"
+                    class="avatar-float w-48 sm:w-56 md:w-auto md:h-96 select-none pointer-events-none"
+                    style="max-width: 60vw;"
                 >
             </div>
 
         </div>
     </section>
 
-    <!-- COMO FUNCIONA — números cinza escuro -->
-    <section class="py-16 md:py-24 px-4 bg-gray-50">
+    <!-- ══════════════════════════════
+         COMO FUNCIONA
+    ══════════════════════════════ -->
+    <section class="py-12 md:py-24 px-4 bg-gray-50">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-12 md:mb-20">
-                <h2 class="text-3xl md:text-4xl font-black text-gray-900 uppercase">Como funciona?</h2>
-                <div class="w-20 h-2 bg-sturmer-yellow mx-auto mt-4"></div>
+            <div class="text-center mb-10 md:mb-20">
+                <h2 class="text-2xl md:text-4xl font-black text-gray-900 uppercase">Como funciona?</h2>
+                <div class="w-16 h-2 bg-sturmer-yellow mx-auto mt-3"></div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                <div class="bg-white p-8 md:p-10 rounded shadow-lg border-t-8 border-sturmer-yellow">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8">
+                <div class="bg-white p-6 md:p-10 rounded shadow-lg border-t-8 border-sturmer-yellow">
                     <span class="text-5xl font-black text-gray-500 block mb-2">01</span>
-                    <h3 class="text-xl md:text-2xl font-bold mb-3 uppercase">Envie a Multa</h3>
+                    <h3 class="text-lg md:text-2xl font-bold mb-2 uppercase">Envie a Multa</h3>
                     <p class="text-gray-600 text-sm md:text-base">Mande o PDF ou foto da autuação para nossa IA no WhatsApp.</p>
                 </div>
-                <div class="bg-white p-8 md:p-10 rounded shadow-lg border-t-8 border-sturmer-yellow">
+                <div class="bg-white p-6 md:p-10 rounded shadow-lg border-t-8 border-sturmer-yellow">
                     <span class="text-5xl font-black text-gray-500 block mb-2">02</span>
-                    <h3 class="text-xl md:text-2xl font-bold mb-3 uppercase">Responda a IA</h3>
+                    <h3 class="text-lg md:text-2xl font-bold mb-2 uppercase">Responda a IA</h3>
                     <p class="text-gray-600 text-sm md:text-base">Forneça detalhes rápidos que a IA solicitar sobre a infração.</p>
                 </div>
-                <div class="bg-white p-8 md:p-10 rounded shadow-lg border-t-8 border-sturmer-yellow">
+                <div class="bg-white p-6 md:p-10 rounded shadow-lg border-t-8 border-sturmer-yellow">
                     <span class="text-5xl font-black text-gray-500 block mb-2">03</span>
-                    <h3 class="text-xl md:text-2xl font-bold mb-3 uppercase">Recurso Pronto</h3>
+                    <h3 class="text-lg md:text-2xl font-bold mb-2 uppercase">Recurso Pronto</h3>
                     <p class="text-gray-600 text-sm md:text-base">Em 10 min você recebe o arquivo pronto para assinar e protocolar.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- URGÊNCIA -->
-    <section class="bg-sturmer-yellow py-10 px-4">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-            <h2 class="text-2xl md:text-4xl font-black text-black uppercase leading-tight">O prazo está correndo!</h2>
-            <a href="https://wa.me/554935181609" class="bg-black text-white px-10 py-4 rounded font-bold text-lg w-full md:w-auto btn-bounce">
+    <!-- ══════════════════════════════
+         URGÊNCIA
+    ══════════════════════════════ -->
+    <section class="bg-sturmer-yellow py-8 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5 text-center md:text-left">
+            <h2 class="text-xl md:text-4xl font-black text-black uppercase leading-tight">O prazo está correndo!</h2>
+            <a href="https://wa.me/554935181609"
+               class="bg-black text-white px-8 py-4 rounded font-bold text-base md:text-lg w-full md:w-auto btn-bounce">
                 GARANTIR MINHA DEFESA
             </a>
         </div>
     </section>
 
-    <!-- POR QUE SOMOS A MELHOR ESCOLHA -->
-    <section class="py-16 md:py-24 px-4 bg-white">
-        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <!-- ══════════════════════════════
+         POR QUE SOMOS A MELHOR ESCOLHA
+    ══════════════════════════════ -->
+    <section class="py-12 md:py-24 px-4 bg-white">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <div class="order-2 md:order-1">
-                <h2 class="text-3xl md:text-4xl font-black mb-6 uppercase tracking-tighter leading-none">Por que somos a melhor escolha?</h2>
-                <ul class="space-y-4 md:space-y-6">
-                    <li class="flex items-start gap-3 font-bold text-base md:text-lg">
+                <h2 class="text-2xl md:text-4xl font-black mb-5 uppercase tracking-tighter leading-none">Por que somos a melhor escolha?</h2>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3 font-bold text-sm md:text-lg">
                         <i class="fas fa-check-circle text-sturmer-yellow mt-1"></i>
                         <span>Análise técnica de erros cometidos pelo agente de trânsito.</span>
                     </li>
-                    <li class="flex items-start gap-3 font-bold text-base md:text-lg">
+                    <li class="flex items-start gap-3 font-bold text-sm md:text-lg">
                         <i class="fas fa-check-circle text-sturmer-yellow mt-1"></i>
                         <span>Legislação atualizada (CONTRAN 2026).</span>
                     </li>
                 </ul>
             </div>
-            <div class="order-1 md:order-2 bg-gray-100 p-8 rounded border-l-8 border-sturmer-yellow shadow-inner">
-                <p class="italic text-gray-700 text-lg mb-4 font-medium">"Pensei que ia perder a carteira, mas a IA gerou um recurso tão detalhado que a JARI cancelou a multa em 15 dias."</p>
-                <p class="font-black text-black uppercase text-sm">— Carlos Eduardo, Chapecó/SC</p>
+            <div class="order-1 md:order-2 bg-gray-100 p-6 md:p-8 rounded border-l-8 border-sturmer-yellow shadow-inner">
+                <p class="italic text-gray-700 text-base md:text-lg mb-3 font-medium">"Pensei que ia perder a carteira, mas a IA gerou um recurso tão detalhado que a JARI cancelou a multa em 15 dias."</p>
+                <p class="font-black text-black uppercase text-xs md:text-sm">— Carlos Eduardo, Chapecó/SC</p>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="dark-section text-white py-12 md:py-20 px-4 border-t-8 border-sturmer-yellow">
+    <!-- ══════════════════════════════
+         FOOTER
+    ══════════════════════════════ -->
+    <footer class="dark-section text-white py-10 md:py-16 px-4 border-t-8 border-sturmer-yellow">
         <div class="max-w-7xl mx-auto text-center">
-            <div class="flex justify-center gap-8 mb-8 text-sturmer-yellow text-3xl">
+            <div class="flex justify-center gap-8 mb-6 text-sturmer-yellow text-3xl">
                 <a href="https://wa.me/554935181609" class="hover:text-white"><i class="fab fa-whatsapp"></i></a>
             </div>
-            <p class="text-gray-500 font-bold uppercase tracking-widest text-[10px] md:text-xs">
+            <p class="text-gray-500 font-bold uppercase tracking-widest text-xs">
                 &copy; 2026 IA DE DEFESAS JURÍDICAS | +55 49 3518-1609
             </p>
         </div>
     </footer>
 
     <!-- FAIXA AMARELA FINAL -->
-    <div style="background-color:#f7c300; height:18px; width:100%;"></div>
+    <div style="background-color:#f7c300; height:16px; width:100%;"></div>
 
 </body>
 </html>
