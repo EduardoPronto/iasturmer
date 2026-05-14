@@ -4,222 +4,392 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IA Recurso de Multas | Defesa em 10 Minutos</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; }
+        /* ─── RESET & BASE ─── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', Arial, sans-serif;
+            background: #fff;
+            color: #111;
             overflow-x: hidden;
             max-width: 100vw;
         }
-        .bg-sturmer-yellow  { background-color: #e8b406; }
-        .text-sturmer-yellow { color: #e8b406; }
-        .border-sturmer-yellow { border-color: #e8b406; }
-        .dark-section { background-color: #0a0a0a; }
+        a { text-decoration: none; color: inherit; }
+        img { display: block; max-width: 100%; height: auto; }
 
-        /* WhatsApp flutuante */
-        .whatsapp-float {
+        /* ─── VARIÁVEIS ─── */
+        :root {
+            --yellow: #e8b406;
+            --dark:   #0a0a0a;
+        }
+
+        /* ─── WHATSAPP FLOAT ─── */
+        .wa-float {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: #25d366;
-            color: white;
             width: 56px;
             height: 56px;
+            background: #25d366;
             border-radius: 50%;
-            font-size: 28px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
+            font-size: 28px;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,.4);
+            z-index: 1000;
         }
+        .wa-float:active { transform: scale(.95); }
 
-        .btn-bounce:active { transform: scale(0.95); }
+        /* ─── NAVBAR ─── */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: var(--yellow);
+            border-bottom: 4px solid var(--dark);
+            padding: 10px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar img {
+            height: 56px;
+            width: auto;
+            max-width: 55vw;
+        }
+        .btn-nav {
+            background: var(--dark);
+            color: #fff;
+            font-weight: 900;
+            font-size: 13px;
+            text-transform: uppercase;
+            padding: 10px 18px;
+            border-radius: 6px;
+            white-space: nowrap;
+            letter-spacing: .05em;
+        }
+        .btn-nav:active { transform: scale(.95); }
 
-        /* Avatar animado */
-        .avatar-float {
+        /* ─── HERO ─── */
+        .hero {
+            background: var(--dark);
+            color: #fff;
+            border-bottom: 8px solid var(--yellow);
+            padding: 40px 20px 0;
+        }
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+        .hero-text { width: 100%; text-align: center; }
+        .hero h1 {
+            font-size: clamp(32px, 9vw, 80px);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -.02em;
+        }
+        .hero h1 span { color: var(--yellow); }
+        .hero p {
+            margin-top: 16px;
+            font-size: clamp(15px, 3.5vw, 22px);
+            color: #aaa;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+        .hero p strong { color: #fff; text-decoration: underline; text-decoration-color: var(--yellow); }
+        .btn-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 28px;
+            background: var(--yellow);
+            color: #000;
+            font-weight: 900;
+            font-size: clamp(15px, 4vw, 20px);
+            text-transform: uppercase;
+            padding: 16px 28px;
+            border-radius: 8px;
+            width: 100%;
+            justify-content: center;
+            animation: pulse-cta 2.2s infinite;
+            letter-spacing: .03em;
+        }
+        .btn-cta:active { transform: scale(.95); }
+        @keyframes pulse-cta {
+            0%   { box-shadow: 0 0 0 0   rgba(232,180,6,.7); }
+            70%  { box-shadow: 0 0 0 16px rgba(232,180,6,0); }
+            100% { box-shadow: 0 0 0 0   rgba(232,180,6,0); }
+        }
+        .processamento {
+            margin-top: 12px;
+            font-size: 11px;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            font-weight: 700;
+        }
+        .processamento i { color: var(--yellow); }
+
+        /* Avatar abaixo do texto no mobile, ao lado no desktop */
+        .hero-avatar {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .hero-avatar img {
+            width: clamp(180px, 55vw, 280px);
             animation: float 3.5s ease-in-out infinite;
-            filter: drop-shadow(0 16px 32px rgba(247,195,0,0.30));
+            filter: drop-shadow(0 16px 32px rgba(232,180,6,.35));
         }
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50%       { transform: translateY(-12px); }
         }
 
-        /* Pulso CTA */
-        .cta-glow {
-            animation: pulse-cta 2.2s infinite;
+        /* ─── COMO FUNCIONA ─── */
+        .como { background: #f5f5f5; padding: 56px 20px; }
+        .section-title {
+            text-align: center;
+            font-size: clamp(22px, 6vw, 36px);
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 8px;
         }
-        @keyframes pulse-cta {
-            0%   { box-shadow: 0 0 0 0   rgba(247,195,0,0.7); }
-            70%  { box-shadow: 0 0 0 16px rgba(247,195,0,0); }
-            100% { box-shadow: 0 0 0 0   rgba(247,195,0,0); }
+        .section-bar {
+            width: 64px;
+            height: 6px;
+            background: var(--yellow);
+            margin: 0 auto 40px;
+        }
+        .cards {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        .card {
+            background: #fff;
+            border-top: 8px solid var(--yellow);
+            border-radius: 6px;
+            padding: 28px 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,.08);
+        }
+        .card-num {
+            font-size: 48px;
+            font-weight: 900;
+            color: #777;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .card h3 {
+            font-size: 18px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .card p { font-size: 14px; color: #555; line-height: 1.6; }
+
+        /* ─── URGÊNCIA ─── */
+        .urgencia {
+            background: var(--yellow);
+            padding: 32px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            text-align: center;
+        }
+        .urgencia h2 {
+            font-size: clamp(20px, 5vw, 36px);
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #000;
+        }
+        .btn-urgencia {
+            background: #000;
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 14px 36px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            width: 100%;
+            text-align: center;
+            display: block;
+        }
+        .btn-urgencia:active { transform: scale(.95); }
+
+        /* ─── POR QUE ─── */
+        .porque { background: #fff; padding: 56px 20px; }
+        .porque-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        .porque h2 {
+            font-size: clamp(22px, 6vw, 36px);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        .porque ul { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+        .porque li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+        .porque li i { color: var(--yellow); margin-top: 2px; flex-shrink: 0; }
+        .depoimento {
+            background: #f3f3f3;
+            border-left: 8px solid var(--yellow);
+            border-radius: 6px;
+            padding: 24px;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,.06);
+        }
+        .depoimento p { font-style: italic; font-size: 15px; color: #444; line-height: 1.6; margin-bottom: 12px; }
+        .depoimento span { font-size: 12px; font-weight: 900; text-transform: uppercase; color: #000; }
+
+        /* ─── FOOTER ─── */
+        .footer {
+            background: var(--dark);
+            color: #fff;
+            border-top: 8px solid var(--yellow);
+            padding: 48px 20px;
+            text-align: center;
+        }
+        .footer-wa { font-size: 32px; color: var(--yellow); margin-bottom: 20px; }
+        .footer-wa a:hover { color: #fff; }
+        .footer p { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; }
+
+        /* ─── FAIXA FINAL ─── */
+        .faixa { background: var(--yellow); height: 16px; width: 100%; }
+
+        /* ─── DESKTOP (≥ 768px) ─── */
+        @media (min-width: 768px) {
+            .navbar img { height: 110px; }
+            .btn-nav { font-size: 15px; padding: 12px 28px; }
+
+            .hero { padding: 64px 40px 0; }
+            .hero-inner { flex-direction: row; align-items: center; gap: 0; }
+            .hero-text { text-align: left; flex: 1; }
+            .btn-cta { width: auto; }
+            .hero-avatar { width: auto; flex-shrink: 0; justify-content: flex-end; }
+            .hero-avatar img { width: auto; height: 420px; }
+
+            .como { padding: 80px 40px; }
+            .cards { grid-template-columns: repeat(3, 1fr); gap: 28px; }
+
+            .urgencia { flex-direction: row; justify-content: space-between; text-align: left; padding: 32px 60px; }
+            .btn-urgencia { width: auto; }
+
+            .porque { padding: 80px 40px; }
+            .porque-inner { flex-direction: row; }
+            .porque-inner > div { flex: 1; }
+            .depoimento { flex: 1; }
         }
     </style>
 </head>
-<body class="bg-white text-gray-900">
+<body>
 
-    <a href="https://wa.me/554935181609" class="whatsapp-float btn-bounce" target="_blank" rel="noopener">
+    <a href="https://wa.me/554935181609" class="wa-float" target="_blank" rel="noopener">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- ══════════════════════════════
-         NAVBAR
-    ══════════════════════════════ -->
-    <nav class="sticky top-0 z-50" style="background-color:#e8b406; border-bottom:4px solid #0a0a0a;">
-        <div class="w-full px-4 py-2 flex justify-between items-center">
-
-            <div class="flex-shrink-0">
-                <!-- Mobile: h-14 | Desktop: h-32 -->
-                <img
-                    src="assets/logo.png"
-                    alt="Stürmer Multas"
-                    class="h-14 md:h-32 w-auto"
-                    style="max-width: 55vw;"
-                >
-            </div>
-
-            <div class="flex-shrink-0">
-                <a href="https://wa.me/554935181609"
-                   class="bg-sturmer-yellow text-black px-4 py-2 md:px-8 md:py-3 rounded font-black text-xs md:text-base uppercase btn-bounce shadow-sm whitespace-nowrap">
-                    Falar com IA
-                </a>
-            </div>
-
-        </div>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <img src="assets/logo.png" alt="Stürmer Multas">
+        <a href="https://wa.me/554935181609" class="btn-nav">Falar com IA</a>
     </nav>
 
-    <!-- ══════════════════════════════
-         HERO
-    ══════════════════════════════ -->
-    <section class="dark-section text-white border-b-8 border-sturmer-yellow">
-        <div class="w-full px-4 py-10 md:py-20 flex flex-col md:flex-row items-center gap-6 md:gap-0 md:max-w-7xl md:mx-auto">
-
-            <!-- Texto -->
-            <div class="w-full md:flex-1 text-center md:text-left">
-                <h1 class="text-3xl sm:text-4xl md:text-7xl font-black leading-tight tracking-tighter">
-                    FOI MULTADO?<br>
-                    <span class="text-sturmer-yellow uppercase">NÓS ANULAMOS.</span>
-                </h1>
-                <p class="mt-4 text-base md:text-2xl text-gray-400 font-light leading-snug">
-                    Nossa IA jurídica gera sua defesa técnica personalizada em apenas
-                    <span class="text-white font-bold underline decoration-sturmer-yellow">10 minutos</span>.
-                </p>
-
-                <div class="mt-8">
-                    <a href="https://wa.me/554935181609"
-                       class="cta-glow bg-sturmer-yellow text-black text-base md:text-xl px-6 py-4 md:px-10 md:py-5 rounded font-black shadow-xl inline-flex items-center gap-3 uppercase w-full md:w-auto justify-center btn-bounce">
-                        <i class="fab fa-whatsapp text-xl md:text-2xl"></i> Iniciar pelo WhatsApp
-                    </a>
-                </div>
-                <p class="mt-4 text-xs text-gray-500 uppercase tracking-widest font-bold text-center md:text-left">
-                    <i class="fas fa-bolt text-sturmer-yellow"></i> Processamento imediato
-                </p>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-text">
+                <h1>FOI MULTADO?<br><span>NÓS ANULAMOS.</span></h1>
+                <p>Nossa IA jurídica gera sua defesa técnica personalizada em apenas <strong>10 minutos</strong>.</p>
+                <a href="https://wa.me/554935181609" class="btn-cta">
+                    <i class="fab fa-whatsapp"></i> Iniciar pelo WhatsApp
+                </a>
+                <p class="processamento"><i class="fas fa-bolt"></i> Processamento imediato</p>
             </div>
-
-            <!-- Avatar -->
-            <div class="flex-shrink-0 flex justify-center w-full md:w-auto">
-                <img
-                    src="assets/avatar.png"
-                    alt="Assistente Stürmer Multas"
-                    class="avatar-float w-48 sm:w-56 md:w-auto md:h-96 select-none pointer-events-none"
-                    style="max-width: 60vw;"
-                >
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ══════════════════════════════
-         COMO FUNCIONA
-    ══════════════════════════════ -->
-    <section class="py-12 md:py-24 px-4 bg-gray-50">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-10 md:mb-20">
-                <h2 class="text-2xl md:text-4xl font-black text-gray-900 uppercase">Como funciona?</h2>
-                <div class="w-16 h-2 bg-sturmer-yellow mx-auto mt-3"></div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8">
-                <div class="bg-white p-6 md:p-10 rounded shadow-lg border-t-8 border-sturmer-yellow">
-                    <span class="text-5xl font-black text-gray-500 block mb-2">01</span>
-                    <h3 class="text-lg md:text-2xl font-bold mb-2 uppercase">Envie a Multa</h3>
-                    <p class="text-gray-600 text-sm md:text-base">Mande o PDF ou foto da autuação para nossa IA no WhatsApp.</p>
-                </div>
-                <div class="bg-white p-6 md:p-10 rounded shadow-lg border-t-8 border-sturmer-yellow">
-                    <span class="text-5xl font-black text-gray-500 block mb-2">02</span>
-                    <h3 class="text-lg md:text-2xl font-bold mb-2 uppercase">Responda a IA</h3>
-                    <p class="text-gray-600 text-sm md:text-base">Forneça detalhes rápidos que a IA solicitar sobre a infração.</p>
-                </div>
-                <div class="bg-white p-6 md:p-10 rounded shadow-lg border-t-8 border-sturmer-yellow">
-                    <span class="text-5xl font-black text-gray-500 block mb-2">03</span>
-                    <h3 class="text-lg md:text-2xl font-bold mb-2 uppercase">Recurso Pronto</h3>
-                    <p class="text-gray-600 text-sm md:text-base">Em 10 min você recebe o arquivo pronto para assinar e protocolar.</p>
-                </div>
+            <div class="hero-avatar">
+                <img src="assets/avatar.png" alt="Assistente Stürmer Multas">
             </div>
         </div>
     </section>
 
-    <!-- ══════════════════════════════
-         URGÊNCIA
-    ══════════════════════════════ -->
-    <section class="bg-sturmer-yellow py-8 px-4">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5 text-center md:text-left">
-            <h2 class="text-xl md:text-4xl font-black text-black uppercase leading-tight">O prazo está correndo!</h2>
-            <a href="https://wa.me/554935181609"
-               class="bg-black text-white px-8 py-4 rounded font-bold text-base md:text-lg w-full md:w-auto btn-bounce">
-                GARANTIR MINHA DEFESA
-            </a>
+    <!-- COMO FUNCIONA -->
+    <section class="como">
+        <h2 class="section-title">Como funciona?</h2>
+        <div class="section-bar"></div>
+        <div class="cards">
+            <div class="card">
+                <div class="card-num">01</div>
+                <h3>Envie a Multa</h3>
+                <p>Mande o PDF ou foto da autuação para nossa IA no WhatsApp.</p>
+            </div>
+            <div class="card">
+                <div class="card-num">02</div>
+                <h3>Responda a IA</h3>
+                <p>Forneça detalhes rápidos que a IA solicitar sobre a infração.</p>
+            </div>
+            <div class="card">
+                <div class="card-num">03</div>
+                <h3>Recurso Pronto</h3>
+                <p>Em 10 min você recebe o arquivo pronto para assinar e protocolar.</p>
+            </div>
         </div>
     </section>
 
-    <!-- ══════════════════════════════
-         POR QUE SOMOS A MELHOR ESCOLHA
-    ══════════════════════════════ -->
-    <section class="py-12 md:py-24 px-4 bg-white">
-        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-            <div class="order-2 md:order-1">
-                <h2 class="text-2xl md:text-4xl font-black mb-5 uppercase tracking-tighter leading-none">Por que somos a melhor escolha?</h2>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3 font-bold text-sm md:text-lg">
-                        <i class="fas fa-check-circle text-sturmer-yellow mt-1"></i>
-                        <span>Análise técnica de erros cometidos pelo agente de trânsito.</span>
-                    </li>
-                    <li class="flex items-start gap-3 font-bold text-sm md:text-lg">
-                        <i class="fas fa-check-circle text-sturmer-yellow mt-1"></i>
-                        <span>Legislação atualizada (CONTRAN 2026).</span>
-                    </li>
+    <!-- URGÊNCIA -->
+    <section class="urgencia">
+        <h2>O prazo está correndo!</h2>
+        <a href="https://wa.me/554935181609" class="btn-urgencia">Garantir minha defesa</a>
+    </section>
+
+    <!-- POR QUE -->
+    <section class="porque">
+        <div class="porque-inner">
+            <div>
+                <h2>Por que somos a melhor escolha?</h2>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i><span>Análise técnica de erros cometidos pelo agente de trânsito.</span></li>
+                    <li><i class="fas fa-check-circle"></i><span>Legislação atualizada (CONTRAN 2026).</span></li>
                 </ul>
             </div>
-            <div class="order-1 md:order-2 bg-gray-100 p-6 md:p-8 rounded border-l-8 border-sturmer-yellow shadow-inner">
-                <p class="italic text-gray-700 text-base md:text-lg mb-3 font-medium">"Pensei que ia perder a carteira, mas a IA gerou um recurso tão detalhado que a JARI cancelou a multa em 15 dias."</p>
-                <p class="font-black text-black uppercase text-xs md:text-sm">— Carlos Eduardo, Chapecó/SC</p>
+            <div class="depoimento">
+                <p>"Pensei que ia perder a carteira, mas a IA gerou um recurso tão detalhado que a JARI cancelou a multa em 15 dias."</p>
+                <span>— Carlos Eduardo, Chapecó/SC</span>
             </div>
         </div>
     </section>
 
-    <!-- ══════════════════════════════
-         FOOTER
-    ══════════════════════════════ -->
-    <footer class="dark-section text-white py-10 md:py-16 px-4 border-t-8 border-sturmer-yellow">
-        <div class="max-w-7xl mx-auto text-center">
-            <div class="flex justify-center gap-8 mb-6 text-sturmer-yellow text-3xl">
-                <a href="https://wa.me/554935181609" class="hover:text-white"><i class="fab fa-whatsapp"></i></a>
-            </div>
-            <p class="text-gray-500 font-bold uppercase tracking-widest text-xs">
-                &copy; 2026 IA DE DEFESAS JURÍDICAS | +55 49 3518-1609
-            </p>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-wa">
+            <a href="https://wa.me/554935181609"><i class="fab fa-whatsapp"></i></a>
         </div>
+        <p>&copy; 2026 IA de Defesas Jurídicas | +55 49 3518-1609</p>
     </footer>
 
-    <!-- FAIXA AMARELA FINAL -->
-    <div style="background-color:#e8b406; height:16px; width:100%;"></div>
+    <div class="faixa"></div>
 
 </body>
 </html>
