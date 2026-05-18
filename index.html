@@ -264,22 +264,123 @@
             box-shadow: inset 0 2px 8px rgba(0,0,0,.06);
         }
         .depoimento p { font-style: italic; font-size: 15px; color: #444; line-height: 1.6; margin-bottom: 12px; }
-        .depoimento span { font-size: 12px; font-weight: 900; text-transform: uppercase; color: #000; }
+        .depoimento span { font-size: 12px; font-weight: 900; text-transform: uppercase; color: #000; display: block; margin-bottom: 20px; }
+        .depoimento span:last-child { margin-bottom: 0; }
 
-        /* ─── FOOTER ─── */
-        .footer {
-            background: var(--dark);
-            color: #fff;
-            border-top: 8px solid var(--yellow);
-            padding: 48px 20px;
-            text-align: center;
+        /* ─── LOCATIONS / CONTATOS / MAPA ─── */
+        .locations {
+            background: #fff;
+            padding: 56px 20px;
+            border-top: 1px solid #eee;
         }
-        .footer-wa { font-size: 32px; color: var(--yellow); margin-bottom: 20px; }
-        .footer-wa a:hover { color: #fff; }
-        .footer p { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; }
+        .locations-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 36px;
+            align-items: start;
+        }
+        .block-title {
+            font-size: 15px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            margin-bottom: 18px;
+            color: #000;
+        }
+        .block-title strong { font-weight: 900; }
+        .addresses {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 32px;
+        }
+        .address {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+        }
+        .address strong {
+            font-weight: 900;
+            color: #000;
+        }
+        .contatos-info {
+            margin-bottom: 20px;
+        }
+        .contatos-info p {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+        .socials {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px;
+        }
+        .socials a {
+            width: 38px;
+            height: 38px;
+            border: 1.5px solid #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            color: #000;
+            transition: background .2s, color .2s, border-color .2s, transform .2s;
+        }
+        .socials a:hover {
+            background: var(--yellow);
+            border-color: var(--yellow);
+            transform: translateY(-2px);
+        }
+        .socials a:active { transform: scale(.95); }
+        .locations-map {
+            width: 100%;
+            height: 320px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 6px 24px rgba(0,0,0,.12);
+            border: 4px solid var(--yellow);
+        }
+        .locations-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
 
-        /* ─── FAIXA FINAL ─── */
-        .faixa { background: var(--yellow); height: 16px; width: 100%; }
+        /* ─── LEGAL FOOTER ─── */
+        .legal-footer {
+            background: var(--yellow);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 4px solid var(--dark);
+        }
+        .legal-footer img {
+            height: 60px;
+            margin: 0 auto 24px;
+            width: auto;
+        }
+        .disclaimer {
+            max-width: 900px;
+            margin: 0 auto 28px;
+            font-size: 13px;
+            color: #000;
+            line-height: 1.6;
+        }
+        .cnpjs {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .cnpjs p {
+            font-size: 12px;
+            color: #000;
+            font-weight: 500;
+        }
 
         /* ─── DESKTOP (≥ 768px) ─── */
         @media (min-width: 768px) {
@@ -303,12 +404,24 @@
             .porque-inner { flex-direction: row; }
             .porque-inner > div { flex: 1; }
             .depoimento { flex: 1; }
+
+            .locations { padding: 80px 40px; }
+            .locations-inner {
+                grid-template-columns: 1fr 1.2fr;
+                gap: 56px;
+            }
+            .locations-map { height: 480px; }
+
+            .legal-footer { padding: 56px 40px; }
+            .legal-footer img { height: 80px; }
+            .disclaimer { font-size: 14px; }
+            .cnpjs p { font-size: 13px; }
         }
     </style>
 </head>
 <body>
 
-    <a href="https://wa.me/554935181609" class="wa-float" target="_blank" rel="noopener">
+    <a href="https://wa.me/554935181609" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -379,22 +492,70 @@
             <div class="depoimento">
                 <p>"Pensei que ia perder a carteira, mas a IA gerou um recurso tão detalhado que a JARI cancelou a multa em 15 dias."</p>
                 <span>— Carlos Eduardo, Chapecó/SC</span>
-                </p>
                 <p>"Nunca tinha visto isso, uma IA tão poderosa que conseguiu anular a minha autuação. Ela pegou cada detalhe do processo. Até meu advogado ficou espantado!"</p>
                 <span>— Rogério Campos, Passo Fundo/SC</span>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="footer-wa">
-            <a href="https://wa.me/554935181609"><i class="fab fa-whatsapp"></i></a>
-        </div>
-        <p>&copy; 2026 Stürmer - IA de Defesas Adeministrativas | +55 49 3518-1609</p>
-    </footer>
+    <!-- ONDE ESTAMOS / CONTATOS / MAPA -->
+    <section class="locations">
+        <div class="locations-inner">
+            <div class="locations-info">
+                <h3 class="block-title">ONDE <strong>ESTAMOS</strong></h3>
+                <div class="addresses">
+                    <div class="address">
+                        <strong>Chapecó/SC</strong>: Ed. Maranello - R. Uruguai, 100D - Sala 03 - Centro
+                    </div>
+                    <div class="address">
+                        <strong>Itapema/SC</strong>: Rua 242, 431, Sala 1 - Meia Praia
+                    </div>
+                    <div class="address">
+                        <strong>Xanxerê/SC</strong>: R. Celestino do Nascimento, 543 - Centro
+                    </div>
+                    <div class="address">
+                        <strong>Lages/SC</strong>: Av Dom Pedro II, 2485, Sala 2 - Vila Nova
+                    </div>
+                </div>
 
-    <div class="faixa"></div>
+                <h3 class="block-title">NOSSOS <strong>CONTATOS</strong></h3>
+                <div class="contatos-info">
+                    <p>(49) 99201-9750 e (49) 3340-1728</p>
+                    <p>assessoriasturmer@gmail.com</p>
+                </div>
+
+                <div class="socials">
+                    <a href="https://wa.me/554935181609" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.facebook.com/Sturmer.recursos/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="mailto:assessoriasturmer@gmail.com" aria-label="E-mail"><i class="fas fa-envelope"></i></a>
+                    <a href="https://www.instagram.com/sturmerrecursosdemultas/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="locations-map">
+                <iframe
+                    src="https://maps.google.com/maps?q=St%C3%BCrmer%20Recursos%20de%20Multas%20Chapec%C3%B3&hl=pt-BR&z=15&output=embed"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    allowfullscreen
+                    title="Localização Stürmer Recursos de Multas"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- LEGAL / CNPJ -->
+    <footer class="legal-footer">
+        <img src="assets/logo.png" alt="Stürmer Recursos de Multas">
+        <p class="disclaimer">
+            Este site não faz parte do Google nem do Facebook ou do Facebook Inc. Além disso, não oferecemos nenhum tipo de serviço oficial do governo, NÃO praticamos fraude, não somos uma empresa que vende criptoativos ou qualquer outro serviço. Essa empresa trabalha exclusivamente com serviços administrativos.
+        </p>
+        <div class="cnpjs">
+            <p>Stürmer Recursos de Multas Ltda - CNPJ 39.747.239/0001-65</p>
+            <p>Stürmer Recursos de Multas Lages - CNPJ 55.076.149/0001-46</p>
+            <p>Stürmer Recursos de Multas Itapema - CNPJ 60.105.414/0001-07</p>
+            <p>Stürmer Recurso De Multas Xanxerê Ltda - CNPJ 50.690.389.0001/12</p>
+        </div>
+    </footer>
 
 </body>
 </html>
