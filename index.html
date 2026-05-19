@@ -156,6 +156,47 @@
             50%       { transform: translateY(-12px); }
         }
 
+        /* ─── QUEM SOMOS ─── */
+        .quem-somos {
+            background: #fff;
+            padding: 48px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .quem-somos-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .quem-somos h2 {
+            font-size: clamp(28px, 7vw, 44px);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: -.01em;
+            color: #000;
+            margin-bottom: 8px;
+        }
+        .quem-somos h2 strong {
+            font-weight: 900;
+        }
+        .quem-somos .accent-bar {
+            width: 64px;
+            height: 6px;
+            background: var(--yellow);
+            margin-bottom: 28px;
+        }
+        .quem-somos p {
+            font-size: 15px;
+            color: #333;
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+        .quem-somos p:last-child {
+            margin-bottom: 0;
+        }
+        .quem-somos strong.highlight {
+            color: #000;
+            font-weight: 800;
+        }
+
         /* ─── COMO FUNCIONA ─── */
         .como { background: #f5f5f5; padding: 56px 20px; }
         .section-title {
@@ -394,6 +435,9 @@
             .hero-avatar { width: auto; flex-shrink: 0; justify-content: flex-end; }
             .hero-avatar img { width: auto; height: 420px; }
 
+            .quem-somos { padding: 72px 40px; }
+            .quem-somos p { font-size: 16px; }
+
             .como { padding: 80px 40px; }
             .cards { grid-template-columns: repeat(3, 1fr); gap: 28px; }
 
@@ -445,6 +489,17 @@
             <div class="hero-avatar">
                 <img src="assets/avatar.png" alt="Assistente Stürmer Multas">
             </div>
+        </div>
+    </section>
+
+    <!-- QUEM SOMOS -->
+    <section class="quem-somos">
+        <div class="quem-somos-inner">
+            <h2>QUEM <strong>SOMOS</strong></h2>
+            <div class="accent-bar"></div>
+            <p>Com mais de <strong class="highlight">8 mil clientes</strong> pessoas físicas de todo o Brasil, nós da Stürmer Recursos de Multas somos especializados no assunto "trânsito" e estamos sempre nos atualizando conforme ocorrem alterações e novidades na legislação.</p>
+            <p>Conquistamos ao longo dos anos <strong class="highlight">milhares de vitórias</strong>, com todos esses processos arquivados com embasamento na legislação. Trabalhamos buscando falhas administrativas dos agentes de trânsito, dos órgãos e nos processos administrativos. Embasamos nossos recursos com nossas próprias jurisprudências, todas obtidas através de árduo trabalho.</p>
+            <p>Essas decisões fortalecem nossos recursos, aumentando a possibilidade de êxito nos julgamentos. Muitas pessoas evitaram entregar a Carteira de Habilitação (CNH) no Detran, pois conseguimos o cancelamento em definitivo do respectivo processo de Suspensão ou Cassação. Inúmeras multas foram arquivadas, evitando assim seu pagamento e, no caso daquelas que já haviam sido pagas, foram restituídas.</p>
         </div>
     </section>
 
